@@ -21,14 +21,11 @@ import java.util.Properties;
 
 @Slf4j
 @EnableJpaRepositories(
-        entityManagerFactoryRef = "entityManagerFactory",
-        transactionManagerRef = "transactionManager",
         basePackages = {
                 "io.labs.springreact.*.repository", "io.labs.springreact.*.support"
         }
 )
 @EnableJpaAuditing
-@Configuration
 public class JPAConfig {
 
     @Primary
