@@ -19,48 +19,48 @@ import java.util.Map;
 @Configuration
 @EnableTransactionManagement
 public class RDBConfig {
-//    @Bean(name="dataSource")
-//    public DataSource routingDataSource(
-//            @Qualifier("masterDataSource") final DataSource masterDataSource
-//            , @Qualifier("slaveDataSource") final DataSource slaveDataSource) {
-//
-//        final AbstractRoutingDataSource routingDataSource = new AbstractRoutingDataSource() {
-//            /** <a href="http://egloos.zum.com/kwon37xi/v/5364167">conf</a> */
-//            @Override
-//            protected Object determineCurrentLookupKey() {
-//                final String dataSourceType = TransactionSynchronizationManager.isCurrentTransactionReadOnly() ? "slave" : "master";
-//                String transactionName = TransactionSynchronizationManager.getCurrentTransactionName();
-//                log.trace("current transaction : {}", transactionName);
-//                log.trace("current dataSource type : {}", dataSourceType);
-//                return dataSourceType;
-//            }
-//        };
-//
-//        final Map<Object, Object> dataSourceMap = new HashMap<>();
-//        dataSourceMap.put("master", masterDataSource);
-//        dataSourceMap.put("slave", slaveDataSource);
-//        routingDataSource.setTargetDataSources(dataSourceMap);
-//        routingDataSource.setDefaultTargetDataSource(masterDataSource);
-//        return routingDataSource;
-//    }
-//
-//    @Primary
-//    @Bean(name = "masterDataSource")
-//    @ConfigurationProperties(prefix = "spring.master.datasource")
-//    public DataSource masterDataSource(final DataSourceProperties dataSourceProperties) {
-//        return dataSourceProperties.initializeDataSourceBuilder().build();
-//    }
-//
-//    @Bean(name = "slaveDataSource")
-//    @ConfigurationProperties(prefix = "spring.slave.datasource")
-//    public DataSource slaveDataSource(final DataSourceProperties slaveDataSourceProperties) {
-//        return slaveDataSourceProperties.initializeDataSourceBuilder().build();
-//    }
+    @Bean(name="dataSource")
+    public DataSource routingDataSource(
+            @Qualifier("masterDataSource") final DataSource masterDataSource
+            , @Qualifier("slaveDataSource") final DataSource slaveDataSource) {
+
+        final AbstractRoutingDataSource routingDataSource = new AbstractRoutingDataSource() {
+            /** <a href="http://egloos.zum.com/kwon37xi/v/5364167">conf</a> */
+            @Override
+            protected Object determineCurrentLookupKey() {
+                final String dataSourceType = TransactionSynchronizationManager.isCurrentTransactionReadOnly() ? "slave" : "master";
+                String transactionName = TransactionSynchronizationManager.getCurrentTransactionName();
+                log.trace("current transaction : {}", transactionName);
+                log.trace("current dataSource type : {}", dataSourceType);
+                return dataSourceType;
+            }
+        };
+
+        final Map<Object, Object> dataSourceMap = new HashMap<>();
+        dataSourceMap.put("master", masterDataSource);
+        dataSourceMap.put("slave", slaveDataSource);
+        routingDataSource.setTargetDataSources(dataSourceMap);
+        routingDataSource.setDefaultTargetDataSource(masterDataSource);
+        return routingDataSource;
+    }
 
     @Primary
-    @Bean(name = "dataSource")
+    @Bean(name = "masterDataSource")
     @ConfigurationProperties(prefix = "spring.master.datasource")
     public DataSource masterDataSource(final DataSourceProperties dataSourceProperties) {
         return dataSourceProperties.initializeDataSourceBuilder().build();
     }
+
+    @Bean(name = "slaveDataSource")
+    @ConfigurationProperties(prefix = "spring.slave.datasource")
+    public DataSource slaveDataSource(final DataSourceProperties slaveDataSourceProperties) {
+        return slaveDataSourceProperties.initializeDataSourceBuilder().build();
+    }
+
+//    @Primary
+//    @Bean(name = "dataSource")
+//    @ConfigurationProperties(prefix = "spring.master.datasource")
+//    public DataSource masterDataSource(final DataSourceProperties dataSourceProperties) {
+//        return dataSourceProperties.initializeDataSourceBuilder().build();
+//    }
 }
