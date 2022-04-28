@@ -1,4 +1,4 @@
-package io.labs.springreact.jpa.model;
+package io.labs.springreact.jpa.constant;
 
 public enum DeliveryStatus {
     READY, //준비

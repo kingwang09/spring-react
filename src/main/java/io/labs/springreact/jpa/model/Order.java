@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalTime;
-import java.util.List;
 
 @ToString
 @Getter
@@ -21,14 +20,14 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "MEMBER_ID")
-    private Member member; //private Long memberId;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;//주문상태
 
     private LocalTime orderDate;     //주문시간
 
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;//주문상태
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member; //private Long memberId;
 
     @OneToOne
     @JoinColumn(name = "DELIVERY_ID")

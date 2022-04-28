@@ -16,6 +16,10 @@ public class OrderItem {
     @Column(name = "ORDER_ITEM_ID")
     private Long id;
 
+    private int count;      //주문 수량
+
+    private int orderPrice; //주문 가격
+
     @ManyToOne
     @JoinColumn(name = "ITEM_ID")
     private Item item; //private Long itemId;
@@ -24,8 +28,6 @@ public class OrderItem {
     @JoinColumn(name = "ORDER_ID")
     private Order order; //private Long orderId;
 
-    private int count;      //주문 수량
-    private int orderPrice; //주문 가격
 
     @Builder
     public OrderItem(Item item, Order order, int count){
