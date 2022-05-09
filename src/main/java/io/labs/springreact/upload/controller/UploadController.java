@@ -37,6 +37,7 @@ public class UploadController {
         if(fileOptional.isPresent()){
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+fileName+"\"")
+                    .header(HttpHeaders.CONTENT_TYPE, "application/octet-stream; charset=utf-8")
                     .body(fileOptional.get());
         }
         return ResponseEntity.notFound().build();
