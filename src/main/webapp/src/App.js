@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import React, {useState, useEffect, Component} from "react";
 import Hello from "./components/Hello";
-import Axios from "./components/Axios";
+import Axios from "./components/axios/Axios";
 
 class App extends Component {
     render() {
