@@ -6,6 +6,8 @@ import io.labs.springreact.greet.model.QGreet;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class GreetQuerySupport extends QuerydslRepositorySupport {
 
@@ -22,7 +24,10 @@ public class GreetQuerySupport extends QuerydslRepositorySupport {
                 .from(greet)
                 .where(greet.id.eq(id))
                 .fetchOne();
+    }
 
+    public List<Greet> findAll(){
+        return (List<Greet>) queryFactory.from(QGreet.greet).fetch();
     }
 }
 

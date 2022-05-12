@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -19,9 +20,8 @@ public class GreetingController {
     private final GreetQuerySupport querySupport;
 
     @GetMapping(value="")
-    public String greeting(@RequestParam(required = false, defaultValue = "world.")String value){
-        log.debug("greeting: {}", value);
-        return value;
+    public List<Greet> list(){
+        return querySupport.findAll();
     }
 
     @PostMapping
