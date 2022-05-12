@@ -1,18 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {useState, useEffect, Component} from "react";
-import Hello from "./components/Hello"
+import Hello from "./components/Hello";
+import Axios from "./components/Axios";
 
 class App extends Component {
     render() {
-        const helloComponent = <Hello />
+        const renderComponent = <Axios />
         let greeting = "spring boot & react";
         return (
             <div>
-                <h1>React Component</h1>
-                <p>{greeting}</p>
+                <h1>React Component: {greeting}</h1>
                 <ul>
-                    <li>{helloComponent}</li>
+                    <li>{renderComponent}</li>
                 </ul>
 
             </div>
