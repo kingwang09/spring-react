@@ -1,5 +1,6 @@
 package io.labs.springreact.greet.controller;
 
+import io.labs.springreact.greet.dto.GreetDto;
 import io.labs.springreact.greet.model.Greet;
 import io.labs.springreact.greet.repository.GreetRepository;
 import io.labs.springreact.greet.support.GreetQuerySupport;
@@ -25,12 +26,12 @@ public class GreetingController {
     }
 
     @PostMapping
-    public Greet saveGreet(@RequestParam(required = true) String name, @RequestParam(required = false, defaultValue = "Hello world.") String greeting){
-        log.debug("save greet: name={}, greeting={}", name, greeting);
+    public Greet saveGreet(@RequestBody GreetDto greetDto){
+        log.debug("save greet:{}", greetDto);
 
         Greet greet = repository.save(Greet.builder()
-                .name(name)
-                .greeting(greeting)
+                .name(greetDto.getName())
+                .greeting(greetDto.getGreeting())
             .build());
         return greet;
     }
