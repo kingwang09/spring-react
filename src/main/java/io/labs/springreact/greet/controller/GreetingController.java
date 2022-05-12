@@ -2,6 +2,7 @@ package io.labs.springreact.greet.controller;
 
 import io.labs.springreact.greet.model.Greet;
 import io.labs.springreact.greet.repository.GreetRepository;
+import io.labs.springreact.greet.support.GreetQuerySupport;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class GreetingController {
 
     private final GreetRepository repository;
+    private final GreetQuerySupport querySupport;
 
     @GetMapping(value="")
     public String greeting(@RequestParam(required = false, defaultValue = "world.")String value){
@@ -42,5 +44,11 @@ public class GreetingController {
             return greetOptional.get();
         }
         return null;
+    }
+
+    @GetMapping("/querydsl/{id}")
+    public Greet findById(@PathVariable Long id){
+        log.debug("find greet Using Query Dsl: id={}", id);
+        return querySupport.findById(id);
     }
 }
