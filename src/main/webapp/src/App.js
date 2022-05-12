@@ -5,7 +5,7 @@ import React, {useState, useEffect, Component} from "react";
 class App extends Component {
 
   render() {
-    let greeting = "hello world!";
+    let greeting = "spring boot & react";
     return (
         <div>
           <h1>{greeting}</h1>
